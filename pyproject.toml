@@ -1,0 +1,76 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "regressgate"
+dynamic = ["version"]
+description = "Statistically sound regression gates for LLM, RAG and agent evals: deterministic checks, repeated trials, bootstrap confidence intervals."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Tan Tran" }]
+keywords = ["llm", "evaluation", "rag", "agents", "ci", "regression-testing", "bootstrap"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Typing :: Typed",
+]
+dependencies = [
+  "pydantic>=2.6",
+  "pyyaml>=6.0",
+  "typer>=0.12",
+]
+
+[project.optional-dependencies]
+http = ["httpx>=0.27"]
+dev = [
+  "httpx>=0.27",
+  "mypy>=1.11",
+  "pre-commit>=3.7",
+  "pytest>=8.3",
+  "pytest-cov>=5.0",
+  "respx>=0.21",
+  "ruff>=0.6",
+  "types-PyYAML>=6.0",
+]
+docs = ["mkdocs-material>=9.5"]
+
+[project.scripts]
+regressgate = "regressgate.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/tantn89/regressgate"
+Documentation = "https://tantn89.github.io/regressgate"
+Issues = "https://github.com/tantn89/regressgate/issues"
+
+[tool.hatch.version]
+path = "src/regressgate/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/regressgate"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src"]
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
