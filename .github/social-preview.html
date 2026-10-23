@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>regressgate social preview</title>
+<style>
+  :root {
+    --bg: #0f1716; --surface: #16211f; --text: #e8efed; --muted: #93a6a1;
+    --accent: #3fc1a5; --bad: #e0795f; --mid: #c9a95b;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: "Segoe UI", system-ui, sans-serif;
+    padding: 64px 72px; display: grid; grid-template-columns: 1fr 520px; gap: 56px;
+  }
+  .brand { font: 600 30px/1 Consolas, "Cascadia Mono", monospace; color: var(--accent); }
+  h1 { font-size: 54px; line-height: 1.08; font-weight: 650; margin-top: 28px; letter-spacing: -0.5px; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .sub { margin-top: 24px; font-size: 22px; line-height: 1.45; color: var(--muted); max-width: 560px; }
+  .install {
+    position: absolute; left: 72px; bottom: 64px;
+    font: 22px Consolas, "Cascadia Mono", monospace; color: var(--text);
+    background: var(--surface); border: 1px solid #24332f; border-radius: 8px; padding: 12px 18px;
+  }
+  .install span { color: var(--muted); }
+  .card {
+    align-self: center; background: var(--surface); border: 1px solid #24332f;
+    border-radius: 14px; padding: 32px 34px;
+  }
+  .card h2 { font-size: 19px; font-weight: 600; color: var(--muted); letter-spacing: 0.2px; }
+  .card h2 strong { color: var(--text); font-weight: 600; }
+  .row { display: grid; grid-template-columns: 150px 1fr 64px; align-items: center; gap: 14px; margin-top: 20px; }
+  .label { font-size: 19px; }
+  .track { height: 26px; background: #1e2c29; border-radius: 6px; overflow: hidden; }
+  .bar { height: 100%; border-radius: 6px; }
+  .value { font: 600 22px Consolas, monospace; text-align: right; font-variant-numeric: tabular-nums; }
+  .divider { height: 1px; background: #24332f; margin: 28px 0 22px; }
+  .catch { display: flex; align-items: baseline; gap: 16px; }
+  .catch .big { font: 700 46px/1 Consolas, monospace; color: var(--accent); }
+  .catch p { font-size: 19px; line-height: 1.35; color: var(--muted); }
+  .catch p strong { color: var(--text); font-weight: 600; }
+  .note { margin-top: 18px; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div>
+    <div class="brand">regressgate</div>
+    <h1>Fail CI on <em>real</em> eval regressions, not on LLM noise.</h1>
+    <p class="sub">Deterministic checks, repeated trials, and a permutation test with
+      per-case exact tests for LLM, RAG and agent evals.</p>
+    <div class="install"><span>$</span> pip install regressgate</div>
+  </div>
+  <div class="card">
+    <h2>False alarms when <strong>nothing changed</strong></h2>
+    <div class="row"><div class="label">Any drop fails</div>
+      <div class="track"><div class="bar" style="width:88%;background:var(--bad)"></div></div>
+      <div class="value">44%</div></div>
+    <div class="row"><div class="label">&gt; 5 pp fails</div>
+      <div class="track"><div class="bar" style="width:10%;background:var(--mid)"></div></div>
+      <div class="value">5%</div></div>
+    <div class="row"><div class="label"><strong>regressgate</strong></div>
+      <div class="track"><div class="bar" style="width:4%;background:var(--accent)"></div></div>
+      <div class="value">2%</div></div>
+    <div class="divider"></div>
+    <div class="catch">
+      <div class="big">92%</div>
+      <p>of runs catch a <strong>single broken case</strong>.<br>The 5 pp tolerance gate catches 42%.</p>
+    </div>
+    <p class="note">1,000 simulated CI runs per gate, 20 cases (4 flaky), 5 trials per case.</p>
+  </div>
+</body>
+</html>
