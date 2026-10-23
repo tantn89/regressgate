@@ -203,6 +203,16 @@ before any target call spends money.
 - **Versioned JSON reports** are the unit of comparison, so a baseline can come from a file
   in git, a CI artifact, or another machine.
 
+## Used by
+
+[filings-copilot](https://github.com/tantn89/filings-copilot), an agentic research assistant
+over SEC 10-K filings, grades its 20 golden questions with regressgate and gates agent
+changes in [`eval-gate.yml`](https://github.com/tantn89/filings-copilot/blob/main/.github/workflows/eval-gate.yml).
+Its single-run eval scored 20/20. Three trials per question showed 98.3%: one in three
+times, Claude Sonnet 5.5 correctly refused to forecast FY2028 revenue and then offered a
+"scenario" with a dollar figure anyway, which that case's `forbidden` check exists to
+catch. The gate now treats that case as flaky instead of failing every prompt change on it.
+
 ## Roadmap
 
 - [ ] Opt-in LLM-judge check with its own repeat-and-agree logic
