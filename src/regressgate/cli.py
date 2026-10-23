@@ -51,24 +51,31 @@ def run(
 ) -> None:
     """Run every case against the target and save a JSON report."""
     config = load_config(config_path)
-    target_spec = target or config.target
-    cases_path = cases or config.cases
+    # Flags are relative to the working directory; config values to the config file.
+    target_spec = target or config.target_spec()
+    cases_path = cases or config.cases_path()
     if not target_spec or not cases_path:
         raise _fail("set target and cases in regressgate.yaml or with --target / --cases")
+    interactive = sys.stderr.isatty()
+
+    def progress(done: int, total: int) -> None:
+        if interactive:
+            typer.echo(f"\r{done}/{total} trials", nl=False, err=True)
+
     try:
         suite = load_cases(cases_path)
         fn = load_target(target_spec, config.http)
         report = run_suite(
-            suite, fn, target_name=target_spec,
+            suite, fn, target_name=target or config.target or "",
             repeats=repeats or config.repeats,
             concurrency=concurrency or config.concurrency,
             keep_outputs=config.keep_outputs,
-            on_progress=lambda done, total: typer.echo(f"\r{done}/{total} trials", nl=False,
-                                                       err=True),
+            on_progress=progress,
         )
     except (CaseFileError, CheckConfigError, TargetError) as e:
         raise _fail(str(e)) from None
-    typer.echo("", err=True)
+    if interactive:
+        typer.echo("", err=True)
     report.save(out)
     summary = render_run(report, seed=config.gate.seed)
     typer.echo(summary)

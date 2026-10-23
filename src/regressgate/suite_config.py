@@ -31,6 +31,16 @@ class SuiteConfig(BaseModel):
     keep_outputs: bool = True
     http: HttpTargetConfig = Field(default_factory=HttpTargetConfig)
     gate: GateConfig = Field(default_factory=GateConfig)
+    # Directory of the config file; relative paths in the file resolve against it.
+    base_dir: Path = Field(default=Path("."), exclude=True)
+
+    def cases_path(self) -> Path | None:
+        if self.cases is None or self.cases.is_absolute():
+            return self.cases
+        return self.base_dir / self.cases
+
+    def target_spec(self) -> str | None:
+        return resolve_relative(self.target, self.base_dir) if self.target else None
 
 
 def load_config(path: Path | None) -> SuiteConfig:
@@ -41,7 +51,20 @@ def load_config(path: Path | None) -> SuiteConfig:
         path = DEFAULT_CONFIG
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     config = SuiteConfig.model_validate(data)
-    # Relative case paths are relative to the config file, not the working directory.
-    if config.cases is not None and not config.cases.is_absolute():
-        config.cases = (path.parent / config.cases)
+    config.base_dir = path.parent
     return config
+
+
+def resolve_relative(spec: str, base_dir: Path) -> str:
+    """A `file.py:function` target relative to `base_dir`; other specs unchanged.
+
+    File paths in a config are relative to the config file, so a suite runs the same from
+    any working directory. The unresolved spec is what reports record, so they never
+    contain a machine-specific absolute path.
+    """
+    if spec.startswith(("http://", "https://")):
+        return spec
+    module_part, sep, attr = spec.rpartition(":")
+    if sep and module_part.endswith(".py") and not Path(module_part).is_absolute():
+        return f"{base_dir / module_part}:{attr}"
+    return spec

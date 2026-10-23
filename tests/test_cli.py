@@ -42,6 +42,19 @@ def test_run_writes_report_and_summary(suite: Path) -> None:
     assert "`de`" in (suite / "summary.md").read_text(encoding="utf-8")
 
 
+def test_config_paths_resolve_against_the_config_file(
+    suite: Path, tmp_path_factory: pytest.TempPathFactory, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (suite / "regressgate.yaml").write_text(
+        "target: capitals_target.py:answer\ncases: cases.jsonl\nrepeats: 1\n", encoding="utf-8")
+    monkeypatch.chdir(tmp_path_factory.mktemp("elsewhere"))
+    result = runner.invoke(app, ["run", "-c", str(suite / "regressgate.yaml"), "--out", "r.json"])
+    assert result.exit_code == 0, result.output
+    # Reports keep the spec as written, never a machine-specific absolute path.
+    assert json.loads(Path("r.json").read_text(encoding="utf-8"))["target"] == (
+        "capitals_target.py:answer")
+
+
 def test_run_flags_override_config(suite: Path) -> None:
     result = runner.invoke(app, ["run", "--repeats", "1", "--out", "one.json"])
     assert result.exit_code == 0, result.output
