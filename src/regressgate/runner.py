@@ -40,6 +40,7 @@ def run_trial(case: Case, target: Target, keep_output: bool = True) -> Trial:
         input_tokens=result.input_tokens,
         output_tokens=result.output_tokens,
         output=result.output if keep_output else None,
+        metadata=result.metadata,
     )
 
 

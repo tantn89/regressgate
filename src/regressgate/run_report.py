@@ -30,6 +30,7 @@ class Trial(BaseModel):
     output_tokens: int | None = None
     error: str | None = None
     output: str | None = None
+    metadata: dict[str, Any] = Field(default_factory=dict)  # from the target, e.g. trace ids
 
 
 class CaseResult(BaseModel):

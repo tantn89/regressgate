@@ -125,7 +125,8 @@ def test_run_suite_repeats_grades_and_records_errors(tmp_path: Path) -> None:
             calls.append(q)
         if q == "boom":
             raise RuntimeError("upstream 500")
-        return TargetResult(output="ok" if q == "good" else "nope", cost_usd=0.01)
+        return TargetResult(output="ok" if q == "good" else "nope", cost_usd=0.01,
+                            metadata={"trace": q})
 
     report = run_suite([case("good"), case("bad"), case("boom")], target, repeats=3,
                        concurrency=3, target_name="t")
@@ -136,6 +137,7 @@ def test_run_suite_repeats_grades_and_records_errors(tmp_path: Path) -> None:
     assert report.pass_rate == pytest.approx(1 / 3)
     assert report.mean_cost_usd() == pytest.approx(0.01)
     assert report.check_pass_rates() == {"contains": 0.5}
+    assert by_id["good"].trials[0].metadata == {"trace": "good"}
     # Reports round-trip through JSON.
     path = report.save(tmp_path / "r" / "report.json")
     assert RunReport.load(path).model_dump() == report.model_dump()
