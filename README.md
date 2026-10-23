@@ -7,6 +7,8 @@ flip? regressgate runs each case several times, grades every output with determi
 checks, and fails the build only when a statistical test says the drop is real.
 
 ![ci](https://github.com/tantn89/regressgate/actions/workflows/ci.yml/badge.svg)
+[![pypi](https://img.shields.io/pypi/v/regressgate)](https://pypi.org/project/regressgate/)
+[![docs](https://img.shields.io/badge/docs-tantn89.github.io-teal)](https://tantn89.github.io/regressgate/)
 ![python](https://img.shields.io/badge/python-3.10%E2%80%933.13-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -60,7 +62,7 @@ cases, 4 at 95%, 4 flaky between 50% and 80%), 1,000 simulated CI runs per row:
 ## Quickstart
 
 ```bash
-pip install "git+https://github.com/tantn89/regressgate"   # PyPI release: pip install regressgate
+pip install regressgate
 ```
 
 1. Describe cases and the checks their outputs must pass (`cases.jsonl`):
