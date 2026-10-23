@@ -1,0 +1,100 @@
+name: regressgate
+description: Run an LLM/RAG/agent eval suite and fail only on statistically real regressions against a baseline.
+author: Tan Tran
+branding:
+  icon: shield
+  color: green
+
+inputs:
+  config:
+    description: Suite config file.
+    default: regressgate.yaml
+  baseline:
+    description: Baseline report JSON to compare against (commit it, or download it in an earlier step).
+    required: true
+  report:
+    description: Where to write the new report.
+    default: .regressgate/report.json
+  repeats:
+    description: Trials per case; overrides the config when set.
+    default: ""
+  install:
+    description: pip requirement for regressgate itself (for example "regressgate==0.1.0" or ".").
+    default: regressgate
+  comment:
+    description: On pull requests, post or update one comment with the verdict.
+    default: "true"
+  github-token:
+    description: Token used for the PR comment (needs pull-requests write).
+    default: ${{ github.token }}
+
+outputs:
+  verdict:
+    description: pass, improvement, warn or regression.
+    value: ${{ steps.compare.outputs.verdict }}
+  failed:
+    description: '"true" when the gate failed.'
+    value: ${{ steps.compare.outputs.failed }}
+
+runs:
+  using: composite
+  steps:
+    - name: Install regressgate
+      shell: bash
+      run: python -m pip install --quiet "${{ inputs.install }}"
+
+    - name: Run the suite
+      shell: bash
+      env:
+        RG_CONFIG: ${{ inputs.config }}
+        RG_REPORT: ${{ inputs.report }}
+        RG_REPEATS: ${{ inputs.repeats }}
+      run: |
+        args=(run --config "$RG_CONFIG" --out "$RG_REPORT" --markdown "$RUNNER_TEMP/rg-run.md")
+        if [ -n "$RG_REPEATS" ]; then args+=(--repeats "$RG_REPEATS"); fi
+        regressgate "${args[@]}"
+
+    - name: Compare against the baseline
+      id: compare
+      shell: bash
+      env:
+        RG_CONFIG: ${{ inputs.config }}
+        RG_REPORT: ${{ inputs.report }}
+        RG_BASELINE: ${{ inputs.baseline }}
+      run: |
+        set +e
+        regressgate compare "$RG_BASELINE" "$RG_REPORT" --config "$RG_CONFIG" \
+          --markdown "$RUNNER_TEMP/rg-gate.md"
+        code=$?
+        set -e
+        if [ "$code" -ge 2 ]; then exit "$code"; fi
+        verdict=$(sed -n 's/^## regressgate: \([A-Z]*\).*/\1/p' "$RUNNER_TEMP/rg-gate.md" | tr 'A-Z' 'a-z')
+        echo "verdict=$verdict" >> "$GITHUB_OUTPUT"
+        echo "failed=$([ "$code" -eq 1 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+        { cat "$RUNNER_TEMP/rg-gate.md"; echo; echo "<details><summary>Run details</summary>"; echo;
+          cat "$RUNNER_TEMP/rg-run.md"; echo; echo "</details>"; } > "$RUNNER_TEMP/rg-comment.md"
+        cat "$RUNNER_TEMP/rg-comment.md" >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Comment on the pull request
+      if: github.event_name == 'pull_request' && inputs.comment == 'true'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+        PR: ${{ github.event.pull_request.number }}
+        REPO: ${{ github.repository }}
+      run: |
+        # Update this action's previous comment instead of adding a new one per push.
+        existing=$(gh api "repos/$REPO/issues/$PR/comments" --paginate \
+          --jq '.[] | select(.body | startswith("<!-- regressgate -->")) | .id' | head -n 1)
+        if [ -n "$existing" ]; then
+          gh api -X PATCH "repos/$REPO/issues/comments/$existing" -F body=@"$RUNNER_TEMP/rg-comment.md" > /dev/null
+        else
+          gh api "repos/$REPO/issues/$PR/comments" -F body=@"$RUNNER_TEMP/rg-comment.md" > /dev/null
+        fi
+
+    - name: Fail on regression
+      if: steps.compare.outputs.failed == 'true'
+      shell: bash
+      run: |
+        echo "::error title=regressgate::Eval regression against the baseline; see the job summary."
+        exit 1
