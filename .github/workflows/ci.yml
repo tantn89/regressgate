@@ -1,0 +1,63 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: ruff check src tests benchmarks examples
+      - run: mypy
+      - run: pytest --cov=regressgate --cov-report=term-missing --cov-fail-under=90
+
+  # Dogfood the GitHub Action on the bundled example: the unchanged bot must pass the gate,
+  # and a deliberately broken variant must fail it.
+  example-gate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Gate the unchanged example
+        uses: ./
+        with:
+          install: .
+          config: examples/support_bot/regressgate.yaml
+          baseline: examples/support_bot/baseline.json
+      - name: Gate a broken variant (must fail)
+        id: broken
+        continue-on-error: true
+        uses: ./
+        env:
+          SUPPORT_BOT_VARIANT: broken
+        with:
+          install: .
+          config: examples/support_bot/regressgate.yaml
+          baseline: examples/support_bot/baseline.json
+          report: .regressgate/broken.json
+          comment: "false"
+      - name: Check the broken variant was caught
+        if: steps.broken.outputs.verdict != 'regression'
+        run: |
+          echo "::error::the gate did not catch the broken variant (verdict: ${{ steps.broken.outputs.verdict }})"
+          exit 1
