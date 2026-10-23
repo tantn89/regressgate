@@ -1,0 +1,41 @@
+site_name: regressgate
+site_description: Fail CI on real LLM, RAG and agent eval regressions, not on noise.
+site_url: https://tantn89.github.io/regressgate/
+repo_url: https://github.com/tantn89/regressgate
+repo_name: tantn89/regressgate
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - navigation.sections
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      toggle:
+        icon: material/brightness-7
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+
+nav:
+  - Overview: index.md
+  - Getting started: getting-started.md
+  - Cases and checks: cases-and-checks.md
+  - How the gate decides: statistics.md
+  - GitHub Action: github-action.md
+  - Custom checks and targets: extending.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.highlight

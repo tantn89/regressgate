@@ -41,7 +41,7 @@ dev = [
   "ruff>=0.6",
   "types-PyYAML>=6.0",
 ]
-docs = ["mkdocs-material>=9.5"]
+docs = ["mkdocs-material>=9.5,<10", "mkdocs<2"]
 
 [project.scripts]
 regressgate = "regressgate.cli:app"
