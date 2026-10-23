@@ -36,7 +36,7 @@ def _fail(message: str) -> typer.Exit:
 def _write(text: str, path: Path | None) -> None:
     if path:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text + "\n", encoding="utf-8")
+        path.write_text(text + "\n", encoding="utf-8", newline="\n")
 
 
 @app.command()

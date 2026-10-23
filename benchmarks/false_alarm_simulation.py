@@ -97,7 +97,7 @@ def main() -> None:
                      f"{_rate(gated)} |")
     text = "\n".join(lines)
     print(text)
-    args.out.write_text(text + "\n", encoding="utf-8")
+    args.out.write_text(text + "\n", encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

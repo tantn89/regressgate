@@ -95,7 +95,8 @@ class RunReport(BaseModel):
     def save(self, path: str | Path) -> Path:
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(self.model_dump_json(indent=2), encoding="utf-8")
+        # LF on every OS, so a committed baseline does not churn between machines.
+        path.write_text(self.model_dump_json(indent=2) + "\n", encoding="utf-8", newline="\n")
         return path
 
     @classmethod
