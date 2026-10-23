@@ -1,0 +1,903 @@
+{
+  "schema_version": 1,
+  "regressgate_version": "0.1.0",
+  "created_at": "2026-10-23T13:38:15+00:00",
+  "target": "support_bot.py:answer",
+  "repeats": 5,
+  "metadata": {},
+  "cases": [
+    {
+      "id": "hours",
+      "tags": [
+        "faq"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 0.000024399982066825032,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "We are open 9am to 6pm, Monday to Friday."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 0.000016700010746717453,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "We are open 9am to 6pm, Monday to Friday."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 6.200018106028438e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "We are open 9am to 6pm, Monday to Friday."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 6.000016583129764e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "We are open 9am to 6pm, Monday to Friday."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.0000013541430235e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "We are open 9am to 6pm, Monday to Friday."
+        }
+      ]
+    },
+    {
+      "id": "shipping-time",
+      "tags": [
+        "faq"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.5999983083456755e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 0.000011999974958598614,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.099980626255274e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.0999945010989904e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 0.00003959998139180243,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        }
+      ]
+    },
+    {
+      "id": "shipping-cost",
+      "tags": [
+        "faq",
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "number": {
+              "passed": true,
+              "score": null,
+              "detail": "found 4.99$"
+            }
+          },
+          "latency_s": 5.199981387704611e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "number": {
+              "passed": true,
+              "score": null,
+              "detail": "found 4.99$"
+            }
+          },
+          "latency_s": 4.7000066842883825e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "number": {
+              "passed": true,
+              "score": null,
+              "detail": "found 4.99$"
+            }
+          },
+          "latency_s": 3.4999975468963385e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "number": {
+              "passed": true,
+              "score": null,
+              "detail": "found 4.99$"
+            }
+          },
+          "latency_s": 3.0999945010989904e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "number": {
+              "passed": true,
+              "score": null,
+              "detail": "found 4.99$"
+            }
+          },
+          "latency_s": 2.9999937396496534e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Standard shipping takes 3 to 5 business days and costs $4.99."
+        }
+      ]
+    },
+    {
+      "id": "warranty",
+      "tags": [
+        "faq"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "lead": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.1999952625483274e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Every device has a 2-year warranty covering manufacturing defects."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "lead": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.8000074457377195e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Every device has a 2-year warranty covering manufacturing defects."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "lead": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.400025889277458e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Every device has a 2-year warranty covering manufacturing defects."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "lead": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.1999952625483274e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Every device has a 2-year warranty covering manufacturing defects."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "lead": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "citation": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.700020559132099e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Every device has a 2-year warranty covering manufacturing defects."
+        }
+      ]
+    },
+    {
+      "id": "password",
+      "tags": [
+        "account"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.7999998312443495e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Use 'Forgot password' on the sign-in page to get a reset link by email."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.2999884095042944e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Use 'Forgot password' on the sign-in page to get a reset link by email."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.5999906938523054e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Use 'Forgot password' on the sign-in page to get a reset link by email."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.300017513334751e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Use 'Forgot password' on the sign-in page to get a reset link by email."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.4999899324029684e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Use 'Forgot password' on the sign-in page to get a reset link by email."
+        }
+      ]
+    },
+    {
+      "id": "cancel",
+      "tags": [
+        "account"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.7999922167509794e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "You can cancel a subscription any time under Settings, then Billing."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.600019797682762e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "You can cancel a subscription any time under Settings, then Billing."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.2999884095042944e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "You can cancel a subscription any time under Settings, then Billing."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.1999876480549574e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "You can cancel a subscription any time under Settings, then Billing."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.600019797682762e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "You can cancel a subscription any time under Settings, then Billing."
+        }
+      ]
+    },
+    {
+      "id": "refund-window",
+      "tags": [
+        "policy"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "contains": {
+              "passed": false,
+              "score": null,
+              "detail": "missing ['30 days']"
+            }
+          },
+          "latency_s": 7.800001185387373e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "You can request a refund from your order page."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.1000021155923605e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Refunds are available within 30 days of purchase if the item is unused."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.2000028770416975e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Refunds are available within 30 days of purchase if the item is unused."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.300017513334751e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Refunds are available within 30 days of purchase."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "contains": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.3999891709536314e-6,
+          "cost_usd": 0.0004,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "Refunds are available within 30 days of purchase if the item is unused."
+        }
+      ]
+    },
+    {
+      "id": "unknown-crypto",
+      "tags": [
+        "abstain"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.9000082071870565e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 7.099995855242014e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.1000021155923605e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.1000021155923605e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.1999952625483274e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        }
+      ]
+    },
+    {
+      "id": "unknown-stock",
+      "tags": [
+        "abstain"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.400025889277458e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.1000021155923605e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.4999975468963385e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.800021320581436e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        },
+        {
+          "passed": true,
+          "checks": {
+            "abstain": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "forbidden": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 2.400018274784088e-6,
+          "cost_usd": 0.0002,
+          "input_tokens": null,
+          "output_tokens": null,
+          "error": null,
+          "output": "I don't have information about that in the help center."
+        }
+      ]
+    }
+  ]
+}

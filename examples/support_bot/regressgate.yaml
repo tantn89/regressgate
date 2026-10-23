@@ -1,0 +1,8 @@
+# Run from anywhere: paths are relative to this file.
+#   regressgate run -c examples/support_bot/regressgate.yaml
+target: support_bot.py:answer
+cases: cases.jsonl
+repeats: 5
+gate:
+  alpha: 0.05
+  max_mean_cost_usd: 0.001

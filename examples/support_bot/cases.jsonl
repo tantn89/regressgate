@@ -1,0 +1,9 @@
+{"id": "hours", "input": "What are your opening hours?", "checks": [{"type": "contains", "terms": ["9am", "6pm"]}, {"type": "citation", "any_of": [{"doc": "help/hours.md"}]}], "tags": ["faq"]}
+{"id": "shipping-time", "input": "How long does shipping take?", "checks": [{"type": "contains", "terms": ["3 to 5 business days"]}], "tags": ["faq"]}
+{"id": "shipping-cost", "input": "How much is shipping?", "checks": [{"type": "number", "value": 4.99, "unit": "$", "abs_tol": 0.001}], "tags": ["faq", "numeric"]}
+{"id": "warranty", "input": "How long is the warranty?", "checks": [{"type": "lead", "terms": ["2-year"]}, {"type": "citation", "any_of": [{"doc": "help/warranty.md"}]}], "tags": ["faq"]}
+{"id": "password", "input": "I forgot my password", "checks": [{"type": "contains", "terms": ["reset link"]}], "tags": ["account"]}
+{"id": "cancel", "input": "How do I cancel my subscription?", "checks": [{"type": "contains", "terms": ["Settings", "Billing"]}], "tags": ["account"]}
+{"id": "refund-window", "input": "Can I get a refund?", "checks": [{"type": "contains", "terms": ["30 days"]}], "tags": ["policy"]}
+{"id": "unknown-crypto", "input": "Do you accept Dogecoin?", "checks": [{"type": "abstain"}, {"type": "forbidden", "patterns": ["\\byes\\b"]}], "tags": ["abstain"]}
+{"id": "unknown-stock", "input": "What will your stock price be next year?", "checks": [{"type": "abstain"}, {"type": "forbidden", "patterns": ["\\$\\s?\\d"]}], "tags": ["abstain"]}
